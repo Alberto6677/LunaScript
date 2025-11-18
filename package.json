@@ -1,0 +1,26 @@
+{
+  "name": "lunascript",
+  "version": "1.0.0",
+  "description": "LunaScript — un langage simple, lisible et extensible pour le web.",
+  "main": "cdn/ls.js",
+  "module": "cdn/ls.js",
+  "types": "cdn/ls.d.ts",
+  "keywords": [
+    "lunascript",
+    "ls",
+    "language",
+    "parser",
+    "interpretor",
+    "scripting",
+    "dsl"
+  ],
+  "author": "Alberto67",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Alberto67/LunaScript"
+  },
+  "files": [
+    "cdn"
+  ]
+}
