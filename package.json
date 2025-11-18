@@ -1,5 +1,5 @@
 {
-  "name": "lunascript",
+  "name": "ls-core",
   "version": "1.0.0",
   "description": "LunaScript — un langage simple, lisible et extensible pour le web.",
   "main": "cdn/ls.js",
