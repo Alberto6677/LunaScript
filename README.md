@@ -1,4 +1,4 @@
-# 🌙 LunaScript  
+# LunaScript 🌙
 **Le premier langage de programmation simple, lisible et 100% en français.**  
 Open-source, rapide, pensé pour les débutants comme pour les créateurs.
 
