@@ -4,15 +4,14 @@
   "description": "LunaScript — un langage simple, lisible et extensible pour le web.",
   "main": "cdn/ls.js",
   "module": "cdn/ls.js",
-  "types": "cdn/ls.d.ts",
   "keywords": [
     "lunascript",
     "ls",
     "language",
     "parser",
     "interpretor",
-    "scripting",
-    "dsl"
+    "dsl",
+    "scripting"
   ],
   "author": "Alberto67",
   "license": "MIT",
