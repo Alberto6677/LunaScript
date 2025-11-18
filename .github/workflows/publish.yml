@@ -3,7 +3,7 @@ name: Publish LunaScript
 on:
   push:
     paths:
-      - 'cdn/**'  # détecte tous les changements dans cdn/
+      - 'cdn/**'
       
 jobs:
   publish:
@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
+          scope: '@your-scope' 
+          always-auth: true 
+          publish: true 
 
       - name: Install dependencies
         run: npm install
