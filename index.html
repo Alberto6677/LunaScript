@@ -9,8 +9,58 @@
 
   <style>
     @keyframes flicker {
-      0%,100% { opacity: 1; }
+      0%, 100% { opacity: 1; }
       50% { opacity: 0.8; }
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #e5e5e5;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    .warm-glow {
+      box-shadow: 0 0 40px rgba(255, 183, 77, 0.15);
+    }
+
+    .card-workshop {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      transition: all 0.3s ease;
+    }
+
+    .card-workshop:hover {
+      background: #1f1f1f;
+      border-color: #3a3a3a;
+      transform: translateY(-2px);
+    }
+
+    .accent-warm {
+      color: #ffb74d;
+    }
+
+    .bg-warm {
+      background: #ffb74d;
+      color: #0a0a0a;
+    }
+
+    .text-warm-dim {
+      color: #a0a0a0;
+    }
+
+    .handwritten {
+      font-family: 'Segoe UI', system-ui;
+      font-style: italic;
+    }
+
+    .paper-note {
+      background: #2a2520;
+      border-left: 3px solid #ffb74d;
+    }
+
+    pre {
+      background: #0d0d0d !important;
+      border: 1px solid #2a2a2a;
     }
 
     .lamp-light {
@@ -20,10 +70,9 @@
       transform: translateX(-50%);
       width: 100%;
       height: 300px;
+      background: radial-gradient(ellipse at top, rgba(255, 183, 77, 0.08) 0%, transparent 70%);
       pointer-events: none;
-      background: radial-gradient(ellipse at top, rgba(255,183,77,0.10) 0%, transparent 70%);
       animation: flicker 3s ease-in-out infinite;
-      z-index:0;
     }
 
     ::selection {
@@ -32,21 +81,21 @@
     }
   </style>
 </head>
-<body class="min-h-screen bg-neutral-950 text-neutral-200 font-sans">
 
-  <!-- Glow -->
+<body class="min-h-screen">
   <div class="lamp-light"></div>
 
   <!-- HEADER -->
-  <header class="w-full flex justify-between items-center py-6 px-8 bg-black/40 backdrop-blur-xl border-b border-neutral-800 sticky top-0 z-50">
+  <header class="w-full flex justify-between items-center py-6 px-8 bg-black/40 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50">
     <div class="flex items-center gap-3">
-      <i data-lucide="moon" class="w-7 h-7 text-amber-400"></i>
+      <i data-lucide="moon" class="w-7 h-7 accent-warm"></i>
       <span class="text-xl font-semibold tracking-wide">LunaScript</span>
     </div>
-    <nav class="flex gap-8 text-sm text-neutral-400">
+
+    <nav class="flex gap-8 text-sm text-warm-dim">
       <a href="#manifeste" class="hover:text-white transition">Manifeste</a>
       <a href="#code" class="hover:text-white transition">Code</a>
-      <a href="https://github.com/Alberto6677/LunaScript" target="_blank" class="flex items-center gap-1 hover:text-white transition">
+      <a href="https://github.com/Alberto6677/LunaScript" target="_blank" class="hover:text-white transition flex items-center gap-1">
         <i data-lucide="github" class="w-4 h-4"></i> GitHub
       </a>
     </nav>
@@ -54,63 +103,81 @@
 
   <!-- HERO -->
   <section class="pt-32 pb-24 px-6 max-w-5xl mx-auto">
-    <span class="text-sm text-neutral-500 uppercase tracking-widest">v0.1 — En construction</span>
-    <h1 class="text-6xl font-bold mt-4 mb-6 leading-tight">
+    <div class="mb-8">
+      <span class="text-sm text-warm-dim uppercase tracking-wider">v0.1 — En construction</span>
+    </div>
+
+    <h1 class="text-6xl font-bold mb-6 leading-tight">
       Programmer en français,<br>
-      <span class="text-amber-400">sans compromis</span>
+      <span class="accent-warm">sans compromis</span>
     </h1>
-    <p class="text-xl text-neutral-400 leading-relaxed mb-10 max-w-3xl">
+
+    <p class="text-xl text-warm-dim leading-relaxed mb-8 max-w-3xl">
       LunaScript n'est pas juste un langage. C'est une invitation à coder dans sa langue, 
       à partager ses idées sans barrière, à apprendre ensemble.
     </p>
-    <div class="bg-neutral-900/70 border-l-4 border-amber-400 p-6 rounded-lg mb-10">
-      <p class="italic text-neutral-300 text-lg">
+
+    <div class="paper-note p-6 rounded-lg mb-10 max-w-2xl">
+      <p class="handwritten text-lg text-gray-300">
         "Pourquoi apprendre à coder devrait nécessiter de maîtriser l'anglais ?<br>
         Pourquoi la logique devrait-elle se cacher derrière une langue étrangère ?"
       </p>
-      <p class="text-sm text-neutral-500 mt-3">— La question qui a tout démarré</p>
+      <p class="text-sm text-warm-dim mt-3">— La question qui a tout démarré</p>
     </div>
-    <div class="flex flex-wrap gap-4 items-center">
-      <a href="#code" class="px-6 py-3 bg-amber-400 text-black font-semibold rounded-lg hover:bg-amber-300 transition">Voir du code</a>
-      <a class="px-6 py-3 bg-neutral-900 border border-neutral-800 rounded-lg font-semibold transition hover:bg-neutral-800" href="https://github.com/Alberto6677/LunaScript" target="_blank">Contribuer</a>
-      <div class="flex items-center gap-2 text-sm text-neutral-500">
+
+    <div class="flex gap-4 items-center">
+      <a href="#code" class="px-6 py-3 bg-warm hover:opacity-90 rounded-lg font-semibold transition">
+        Voir du code
+      </a>
+      <a href="https://github.com/Alberto6677/LunaScript" target="_blank" class="px-6 py-3 card-workshop rounded-lg font-semibold transition">
+        Contribuer
+      </a>
+      <div class="flex items-center gap-2 text-sm text-warm-dim ml-4">
         <i data-lucide="heart" class="w-4 h-4 text-red-400"></i>
-        Projet humain & open-source
+        <span>Projet humain & open-source</span>
       </div>
     </div>
   </section>
 
   <!-- MANIFESTE -->
   <section id="manifeste" class="px-6 py-24 bg-black/40">
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-5xl mx-auto">
       <h2 class="text-4xl font-bold mb-12">Le manifeste</h2>
+
       <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-xl hover:border-neutral-700 hover:bg-neutral-850 transition">
-          <i data-lucide="languages" class="w-8 h-8 text-amber-400 mb-4"></i>
-          <h3 class="text-xl font-semibold mb-3">Notre langue, notre code</h3>
-          <p class="text-neutral-400 leading-relaxed">
-            Coder en français, c'est penser en français. Pas de traduction mentale, pas de friction. Juste de la logique pure exprimée dans nos mots.
+        <div class="card-workshop p-8 rounded-lg">
+          <i data-lucide="languages" class="w-8 h-8 accent-warm mb-4"></i>
+          <h3 class="text-xl font-bold mb-3">Notre langue, notre code</h3>
+          <p class="text-warm-dim leading-relaxed">
+            Coder en français, c'est penser en français. Pas de traduction mentale, 
+            pas de friction. Juste de la logique pure exprimée dans nos mots.
           </p>
         </div>
-        <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-xl hover:border-neutral-700 hover:bg-neutral-850 transition">
-          <i data-lucide="users" class="w-8 h-8 text-amber-400 mb-4"></i>
-          <h3 class="text-xl font-semibold mb-3">Accessible à tous</h3>
-          <p class="text-neutral-400 leading-relaxed">
-            Du lycéen curieux au développeur confirmé, LunaScript se lit naturellement. Pas de jargon inutile, pas de complexité artificielle.
+
+        <div class="card-workshop p-8 rounded-lg">
+          <i data-lucide="users" class="w-8 h-8 accent-warm mb-4"></i>
+          <h3 class="text-xl font-bold mb-3">Accessible à tous</h3>
+          <p class="text-warm-dim leading-relaxed">
+            Du lycéen curieux au développeur confirmé, LunaScript se lit naturellement. 
+            Pas de jargon inutile, pas de complexité artificielle.
           </p>
         </div>
-        <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-xl hover:border-neutral-700 hover:bg-neutral-850 transition">
-          <i data-lucide="zap" class="w-8 h-8 text-amber-400 mb-4"></i>
-          <h3 class="text-xl font-semibold mb-3">Pas de friction technique</h3>
-          <p class="text-neutral-400 leading-relaxed">
-            Une ligne de CDN et vous codez. Pas de Node, pas de build, pas de config. L'atelier est prêt, il ne manque que vous.
+
+        <div class="card-workshop p-8 rounded-lg">
+          <i data-lucide="zap" class="w-8 h-8 accent-warm mb-4"></i>
+          <h3 class="text-xl font-bold mb-3">Pas de friction technique</h3>
+          <p class="text-warm-dim leading-relaxed">
+            Une ligne de CDN et vous codez. Pas de Node, pas de build, pas de config. 
+            L'atelier est prêt, il ne manque que vous.
           </p>
         </div>
-        <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-xl hover:border-neutral-700 hover:bg-neutral-850 transition">
-          <i data-lucide="heart-handshake" class="w-8 h-8 text-amber-400 mb-4"></i>
-          <h3 class="text-xl font-semibold mb-3">Construit ensemble</h3>
-          <p class="text-neutral-400 leading-relaxed">
-            Open-source par conviction. Bienveillant par nature. Chaque contribution compte, chaque idée est entendue.
+
+        <div class="card-workshop p-8 rounded-lg">
+          <i data-lucide="heart-handshake" class="w-8 h-8 accent-warm mb-4"></i>
+          <h3 class="text-xl font-bold mb-3">Construit ensemble</h3>
+          <p class="text-warm-dim leading-relaxed">
+            Open-source par conviction. Bienveillant par nature. 
+            Chaque contribution compte, chaque idée est entendue.
           </p>
         </div>
       </div>
@@ -121,50 +188,54 @@
   <section id="code" class="px-6 py-24">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-4xl font-bold mb-4">Voyez par vous-même</h2>
-      <p class="text-neutral-500 mb-12">Du code qui se lit comme on pense</p>
-      <div class="bg-neutral-900 border border-neutral-800 rounded-xl p-8">
-        <div class="flex items-center justify-between mb-6 pb-4 border-b border-neutral-800">
+      <p class="text-warm-dim mb-12">Du code qui se lit comme on pense</p>
+
+      <div class="card-workshop rounded-lg p-8">
+        <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-800">
           <div class="flex items-center gap-3">
             <div class="flex gap-2">
               <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
               <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
               <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
             </div>
-            <span class="text-sm text-neutral-500 ml-2">premier_script.ls</span>
+            <span class="text-sm text-warm-dim ml-2">premier_script.ls</span>
           </div>
-          <span class="text-xs text-neutral-500">LunaScript v0.1</span>
+          <span class="text-xs text-warm-dim">LunaScript v0.1</span>
         </div>
-        <pre class="p-6 rounded-lg text-base leading-relaxed overflow-x-auto bg-neutral-950 border border-neutral-800">
-def nom = "Alberto67"
-msg(nom)
 
-repeter 3 {
-    msg("Salut depuis LunaScript")
+        <pre class="p-6 rounded-lg text-base leading-loose overflow-x-auto"><code><span style="color: #ff6b9d;">def</span> nom = <span style="color: #a8cc8c;">"Alberto67"</span>
+<span style="color: #79b8ff;">msg</span>(nom)
+
+<span style="color: #ff6b9d;">repeter</span> <span style="color: #ffab70;">3</span> {
+    <span style="color: #79b8ff;">msg</span>(<span style="color: #a8cc8c;">"Salut depuis LunaScript"</span>)
 }
 
-si (nom == "Alberto67") {
-    msg("Bienvenue, créateur")
-} sinon {
-    msg("Bienvenue, visiteur")
-}
-        </pre>
-        <div class="mt-6 bg-neutral-900 border border-neutral-800 p-5 rounded-lg">
-          <div class="text-sm text-neutral-500 mb-3 flex items-center gap-2">
-            <i data-lucide="terminal" class="w-4 h-4"></i> Console
+<span style="color: #ff6b9d;">si</span> (nom == <span style="color: #a8cc8c;">"Alberto67"</span>) {
+    <span style="color: #79b8ff;">msg</span>(<span style="color: #a8cc8c;">"Bienvenue, créateur"</span>)
+} <span style="color: #ff6b9d;">sinon</span> {
+    <span style="color: #79b8ff;">msg</span>(<span style="color: #a8cc8c;">"Bienvenue, visiteur"</span>)
+}</code></pre>
+
+        <div class="mt-6 card-workshop p-5 rounded-lg">
+          <div class="text-sm text-warm-dim mb-3 flex items-center gap-2">
+            <i data-lucide="terminal" class="w-4 h-4"></i>
+            Console
           </div>
-          <div class="font-mono text-sm space-y-1 text-green-400">
-            <div>&gt; Alberto67</div>
-            <div>&gt; Salut depuis LunaScript</div>
-            <div>&gt; Salut depuis LunaScript</div>
-            <div>&gt; Salut depuis LunaScript</div>
-            <div>&gt; Bienvenue, créateur</div>
+          <div class="font-mono text-sm space-y-1">
+            <div class="text-green-400">> Alberto67</div>
+            <div class="text-green-400">> Salut depuis LunaScript</div>
+            <div class="text-green-400">> Salut depuis LunaScript</div>
+            <div class="text-green-400">> Salut depuis LunaScript</div>
+            <div class="text-green-400">> Bienvenue, créateur</div>
           </div>
         </div>
       </div>
-      <div class="mt-8 bg-neutral-900 border-l-4 border-amber-400 p-6 rounded-lg">
-        <p class="text-neutral-500">
-          <i data-lucide="lightbulb" class="w-5 h-5 text-amber-400 inline mr-2"></i>
-          <strong>Vous voyez ?</strong> Pas besoin de documentation pour comprendre. Le code parle de lui-même.
+
+      <div class="mt-8 paper-note p-6 rounded-lg">
+        <p class="text-warm-dim">
+          <i data-lucide="lightbulb" class="w-5 h-5 accent-warm inline mr-2"></i>
+          <strong>Vous voyez ?</strong> Pas besoin de documentation pour comprendre. 
+          Le code parle de lui-même.
         </p>
       </div>
     </div>
@@ -174,20 +245,29 @@ si (nom == "Alberto67") {
   <section class="px-6 py-24 bg-black/40">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-4xl font-bold mb-4">Commencer maintenant</h2>
-      <p class="text-neutral-500 mb-10">Deux lignes. C'est tout.</p>
-      <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-xl">
-        <div class="text-sm text-neutral-500 mb-4">Dans votre fichier HTML :</div>
-        <pre class="p-6 rounded-lg overflow-x-auto text-base bg-neutral-950 border border-neutral-800">
-&lt;script src="https://lunascript.onrender.com/cdn/ls.js"&gt;&lt;/script&gt;
-&lt;script type="ls"&gt;
-    msg("LunaScript est prêt 🌙")
-&lt;/script&gt;
-        </pre>
+      <p class="text-warm-dim mb-10">Deux lignes. C'est tout.</p>
+
+      <div class="card-workshop p-8 rounded-lg">
+        <div class="text-sm text-warm-dim mb-4">Dans votre fichier HTML :</div>
+        <pre class="p-6 rounded-lg overflow-x-auto"><code class="text-base"><span style="color: #e5e5e5;">&lt;</span><span style="color: #ff6b9d;">script</span> <span style="color: #79b8ff;">src</span><span style="color: #e5e5e5;">=</span><span style="color: #a8cc8c;">"https://lunascript.onrender.com/cdn/ls.js"</span><span style="color: #e5e5e5;">&gt;&lt;/</span><span style="color: #ff6b9d;">script</span><span style="color: #e5e5e5;">&gt;</span>
+<span style="color: #e5e5e5;">&lt;</span><span style="color: #ff6b9d;">script</span> <span style="color: #79b8ff;">type</span><span style="color: #e5e5e5;">=</span><span style="color: #a8cc8c;">"ls"</span><span style="color: #e5e5e5;">&gt;</span>
+    <span style="color: #79b8ff;">msg</span>(<span style="color: #a8cc8c;">"LunaScript est prêt 🌙"</span>)
+<span style="color: #e5e5e5;">&lt;/</span><span style="color: #ff6b9d;">script</span><span style="color: #e5e5e5;">&gt;</span></code></pre>
       </div>
-      <div class="mt-8 flex flex-wrap gap-8 text-sm text-neutral-500">
-        <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i> Pas de npm</div>
-        <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i> Pas de build</div>
-        <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i> Pas de configuration</div>
+
+      <div class="mt-8 flex gap-8 text-sm text-warm-dim">
+        <div class="flex items-center gap-2">
+          <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+          <span>Pas de npm</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+          <span>Pas de build</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+          <span>Pas de configuration</span>
+        </div>
       </div>
     </div>
   </section>
@@ -195,22 +275,26 @@ si (nom == "Alberto67") {
   <!-- REJOINDRE -->
   <section class="px-6 py-24">
     <div class="max-w-4xl mx-auto">
-      <div class="bg-neutral-900 border border-neutral-800 p-12 rounded-xl text-center shadow-amber-400/20">
-        <i data-lucide="coffee" class="w-12 h-12 text-amber-400 mx-auto mb-6"></i>
+      <div class="card-workshop p-12 rounded-lg text-center warm-glow">
+        <i data-lucide="coffee" class="w-12 h-12 accent-warm mx-auto mb-6"></i>
         <h2 class="text-3xl font-bold mb-4">L'atelier est ouvert</h2>
-        <p class="text-xl text-neutral-500 leading-relaxed mb-8 max-w-2xl mx-auto">
+        <p class="text-xl text-warm-dim leading-relaxed mb-8 max-w-2xl mx-auto">
           LunaScript se construit avec vous. Développeur, enseignant, étudiant, curieux... 
           Votre perspective compte. Votre contribution compte.
         </p>
+
         <div class="flex gap-4 justify-center flex-wrap">
-          <a href="https://github.com/Alberto6677/LunaScript" target="_blank" class="px-8 py-4 bg-amber-400 text-black rounded-xl font-semibold hover:bg-amber-300 flex items-center gap-2 transition">
-            <i data-lucide="github" class="w-5 h-5"></i> Voir le code source
+          <a href="https://github.com/Alberto6677/LunaScript" target="_blank" class="px-8 py-4 bg-warm hover:opacity-90 rounded-lg font-semibold transition flex items-center gap-2">
+            <i data-lucide="github" class="w-5 h-5"></i>
+            Voir le code source
           </a>
-          <a href="https://github.com/Alberto6677/LunaScript/issues" target="_blank" class="px-8 py-4 bg-neutral-900 border border-neutral-800 rounded-xl font-semibold hover:bg-neutral-800 flex items-center gap-2 transition">
-            <i data-lucide="message-square" class="w-5 h-5"></i> Proposer une idée
+          <a href="https://github.com/Alberto6677/LunaScript/issues" target="_blank" class="px-8 py-4 card-workshop hover:bg-gray-900 rounded-lg font-semibold transition flex items-center gap-2">
+            <i data-lucide="message-square" class="w-5 h-5"></i>
+            Proposer une idée
           </a>
         </div>
-        <p class="text-sm text-neutral-500 mt-8 italic">
+
+        <p class="text-sm text-warm-dim mt-8 handwritten">
           "Les meilleurs projets sont ceux qu'on construit ensemble"
         </p>
       </div>
@@ -218,26 +302,32 @@ si (nom == "Alberto67") {
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-12 px-6 border-t border-neutral-900">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-      <div class="flex items-center gap-3">
-        <i data-lucide="moon" class="w-6 h-6 text-amber-400"></i>
-        <div>
-          <div class="font-semibold">LunaScript</div>
-          <div class="text-sm text-neutral-500">Par Alberto67</div>
+  <footer class="py-12 px-6 border-t border-gray-900">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-3">
+          <i data-lucide="moon" class="w-6 h-6 accent-warm"></i>
+          <div>
+            <div class="font-semibold">LunaScript</div>
+            <div class="text-sm text-warm-dim">Par Alberto67</div>
+          </div>
+        </div>
+
+        <div class="flex gap-6 text-sm text-warm-dim">
+          <a href="https://github.com/Alberto6677/LunaScript" target="_blank" class="hover:text-white transition flex items-center gap-1">
+            <i data-lucide="github" class="w-4 h-4"></i>
+            GitHub
+          </a>
+          <a href="https://github.com/Alberto6677/LunaScript/blob/main/LICENSE" target="_blank" class="hover:text-white transition flex items-center gap-1">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+            Licence MIT
+          </a>
         </div>
       </div>
-      <div class="flex gap-6 text-sm text-neutral-500">
-        <a href="https://github.com/Alberto6677/LunaScript" target="_blank" class="flex items-center gap-1 hover:text-white transition">
-          <i data-lucide="github" class="w-4 h-4"></i> GitHub
-        </a>
-        <a href="https://github.com/Alberto6677/LunaScript/blob/main/LICENSE" target="_blank" class="flex items-center gap-1 hover:text-white transition">
-          <i data-lucide="file-text" class="w-4 h-4"></i> Licence MIT
-        </a>
+
+      <div class="mt-8 text-center text-sm text-warm-dim">
+        Fait avec <i data-lucide="heart" class="w-3 h-3 inline text-red-400"></i> pour la communauté francophone
       </div>
-    </div>
-    <div class="mt-8 text-center text-sm text-neutral-500">
-      Fait avec <i data-lucide="heart" class="w-3 h-3 inline text-red-400"></i> pour la communauté francophone
     </div>
   </footer>
 
