@@ -1,0 +1,11 @@
+{
+  "functions": {
+    "msg": "console.log",
+    "att": "console.warn",
+    "err": "console.error",
+    "popup": "alert",
+
+    "el": "document.getElementById",
+    "html": "((el, value) => el.innerHTML = value)"
+  }
+}
