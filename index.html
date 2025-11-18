@@ -2,56 +2,101 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LunaScript — Le langage simple et français du Web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LunaScript — Le langage lunaire du Web</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
 
   <style>
     body {
-      background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
+      background: radial-gradient(circle at top center, #3a1b66 0%, #0e0a1f 60%, #05040b 100%);
       color: white;
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Galaxie animée */
+    .stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 200%; height: 200%;
+      background-image: radial-gradient(white 1px, transparent 1px);
+      background-size: 3px 3px;
+      opacity: 0.12;
+      animation: moveStars 80s linear infinite;
+    }
+    @keyframes moveStars {
+      from { transform: translate(0,0); }
+      to { transform: translate(-100px, -100px); }
+    }
+
+    /* Flou de verre */
+    .glass {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255,255,255,0.1);
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col">
+
+<body class="min-h-screen relative">
+
+  <div class="stars"></div>
 
   <!-- HEADER -->
-  <header class="w-full py-6 px-8 flex justify-between items-center">
-    <h1 class="text-3xl font-bold text-white">🌙 LunaScript</h1>
+<header class="w-full flex justify-between items-center py-6 px-8 glass fixed top-0 left-0 z-50">
+  <div class="flex items-center gap-3">
+    <i data-lucide="moon" class="w-7 h-7 text-purple-300"></i>
+    <span class="text-2xl font-bold tracking-wide">LunaScript</span>
+  </div>
 
-    <nav class="flex gap-6 text-lg">
-      <a href="/docs" class="hover:text-blue-300 transition">Documentation</a>
-      <a href="https://github.com/" class="hover:text-blue-300 transition">GitHub</a>
-    </nav>
-  </header>
+  <nav class="flex gap-8 text-lg text-gray-300">
+    <a href="/docs" class="hover:text-purple-300 transition"><i data-lucide="library"></i></a>
+    <a href="https://github.com/Alberto6677/LunaScript" class="hover:text-purple-300 transition"><i data-lucide="github"></i></a>
+  </nav>
+</header>
 
-  <!-- HERO -->
-  <section class="flex-1 flex flex-col items-center justify-center text-center px-6">
-    <h2 class="text-5xl font-extrabold mb-4">Le langage simple, lisible et français</h2>
-    <p class="text-xl text-gray-300 max-w-2xl">
-      Écris du code clair, rapide et logique. LunaScript te permet d’utiliser une syntaxe française,
-      intuitive, inspirée de Scratch mais aussi rapide qu’un vrai langage.
-    </p>
+<!-- HERO -->
+<section class="pt-40 pb-32 px-6 flex flex-col items-center text-center">
+  <h1 class="text-6xl font-extrabold bg-gradient-to-b from-purple-200 to-purple-500 text-transparent bg-clip-text drop-shadow-xl">
+    Le premier langage français<br>pensé pour le Web moderne
+  </h1>
 
-    <div class="mt-10 flex gap-4">
-      <a href="/docs"
-         class="px-7 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl text-lg font-medium transition">
-        Lire la documentation
-      </a>
-      <a href="#exemple"
-         class="px-7 py-3 bg-white/10 hover:bg-white/20 rounded-xl text-lg font-medium transition">
-        Voir un exemple
-      </a>
-    </div>
-  </section>
+  <p class="text-xl text-gray-300 mt-6 max-w-3xl leading-relaxed">
+    LunaScript est un langage simple, clair et entièrement en français.
+    Conçu pour apprendre plus vite, créer plus facilement, et rendre le code
+    accessible à tous — débutants comme passionnés.  
+    <br><br>
+    Il est <span class="text-purple-300 font-semibold">open-source</span>,
+    rapide à intégrer, et entièrement pensé pour les développeurs francophones.
+  </p>
 
-  <!-- EXAMPLE -->
-  <section id="exemple" class="w-full py-20 px-6 bg-black/30 backdrop-blur-lg mt-20">
-    <div class="max-w-4xl mx-auto">
-      <h3 class="text-3xl font-bold mb-6 text-center">Un premier script en LS</h3>
+  <div class="mt-10 flex gap-4">
+    <a href="/docs" class="px-8 py-3 bg-purple-600 hover:bg-purple-500 rounded-xl text-lg font-medium transition shadow-xl flex items-center gap-1">
+      <i data-lucide="library" class="w-5 h-5"></i> Voir les docs
+    </a>
 
-      <pre class="bg-black/60 p-6 rounded-xl text-left text-lg overflow-x-auto">
+    <a href="#exemple" class="px-8 py-3 bg-white/10 hover:bg-white/20 rounded-xl text-lg font-medium transition flex items-center gap-2">
+      <i data-lucide="code-2" class="w-5 h-5"></i> Voir du code LS
+    </a>
+  </div>
+
+  <div class="mt-12 flex items-center gap-3 bg-white/10 px-5 py-3 rounded-xl glass text-sm text-gray-300">
+    <i data-lucide="rocket" class="w-5 h-5 text-purple-300"></i>
+    Version 0.1 — Langage open-source en développement
+  </div>
+</section>
+
+  <!-- EXEMPLE DE CODE -->
+  <section id="exemple" class="px-6 py-20">
+    <div class="max-w-3xl mx-auto glass p-8 rounded-2xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-6 flex items-center gap-2">
+        <i data-lucide="rocket" class="w-6 h-6 text-purple-300"></i>
+        Premier script en LS
+      </h2>
+
+      <pre class="bg-black/40 p-6 rounded-xl text-lg text-purple-100 overflow-x-auto leading-relaxed">
 def nom = "Alberto67"
 msg(nom)
 
@@ -63,36 +108,32 @@ si (1) {
     msg("Condition vraie")
 }
       </pre>
-
-      <p class="text-gray-300 text-center mt-4">
-        Une syntaxe simple, puissante et facile à apprendre.
-      </p>
     </div>
   </section>
 
-  <!-- INSTALL -->
-  <section class="w-full py-20 px-6">
-    <div class="max-w-3xl mx-auto text-center">
-      <h3 class="text-3xl font-bold mb-6">Installer LunaScript</h3>
+  <!-- INSTALLATION -->
+  <section class="px-6 py-20 text-center">
+    <h2 class="text-4xl font-bold mb-8">Installer LunaScript</h2>
 
-      <p class="text-xl text-gray-300 mb-6">
-        Ajoute simplement le CDN à ta page HTML :
-      </p>
+    <p class="text-lg text-gray-300 mb-6">
+      Ajoute ceci à ton HTML :
+    </p>
 
-      <pre class="bg-black/60 p-6 rounded-xl text-left text-lg overflow-x-auto">
-<script src="https://lunascript.onrender.com/cdn/ls.js"></script>
-<script type="ls">
-msg("LunaScript est chargé !")
-</script>
-        </p>
-      </pre>
-    </div>
+    <pre class="bg-black/40 p-6 rounded-xl text-lg max-w-2xl mx-auto overflow-x-auto">
+&lt;script src="https://lunascript.onrender.com/cdn/ls.js"&gt;&lt;/script&gt;
+&lt;script type="ls"&gt;
+msg("LunaScript chargé !")
+&lt;/script&gt;
+    </pre>
   </section>
 
   <!-- FOOTER -->
-  <footer class="w-full py-8 text-center text-gray-400 text-sm">
-    © 2025 LunaScript — Créé par Alberto67
+  <footer class="py-8 text-center text-gray-400 text-sm">
+    © 2025 — LunaScript. Créé par Alberto67.
   </footer>
-
+  
+  <script>
+    lucide.createIcons();
+  </script>
 </body>
 </html>
