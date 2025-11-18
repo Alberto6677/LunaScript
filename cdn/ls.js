@@ -1,4 +1,8 @@
-(function() {
+// =======================
+// LS — VERSION 0.1
+// =======================
+
+(function () {
 
     function loadLSScripts() {
         const scripts = document.querySelectorAll('script[type="ls"]');
@@ -20,6 +24,10 @@
 
     window.addEventListener("DOMContentLoaded", loadLSScripts);
 })();
+
+// =======================
+// TOKENIZER
+// =======================
 
 function tokenize(code) {
     const tokens = [];
@@ -61,6 +69,10 @@ function tokenize(code) {
     return tokens;
 }
 
+// =======================
+// PARSER
+// =======================
+
 function parse(tokens) {
     let i = 0;
 
@@ -69,47 +81,51 @@ function parse(tokens) {
 
     function parseValue() {
         let t = next();
-        if (t.type === "number" || t.type === "string") return t;
-        if (t.type === "ident") return t;
-        throw new Error("Valeur invalide");
-    }
+        if (t.type === "number" || t.type === "string")
+            return { type: "value", value: t.value };
 
-    function parseExpression() {
-        return parseValue();
+        if (t.type === "ident")
+            return { type: "var", name: t.value };
+
+        throw new Error("Valeur invalide");
     }
 
     function parseStatement() {
         let t = peek();
 
+        // ----- assignation -----
         if (t.value === "def" || t.value === "var") {
-            next(); // consume def/var
+            next(); // def/var
             let name = next().value;
             next(); // =
-            let value = parseExpression();
+            let value = parseValue();
             return { type: "assign", const: (t.value === "def"), name, value };
         }
 
+        // ----- msg("hello") -----
         if (t.value === "msg") {
             next(); // msg
             next(); // (
-            let val = parseExpression();
+            let val = parseValue();
             next(); // )
             return { type: "msg", value: val };
         }
 
+        // ----- si(cond){...} -----
         if (t.value === "si") {
             next(); // si
             next(); // (
-            let cond = parseExpression();
+            let cond = parseValue();
             next(); // )
             next(); // {
             let body = parseBlock();
             return { type: "if", cond, body };
         }
 
+        // ----- repeter N {...} -----
         if (t.value === "repeter") {
-            next(); // repeter
-            let count = parseExpression();
+            next();
+            let count = parseValue();
             next(); // {
             let body = parseBlock();
             return { type: "repeat", count, body };
@@ -135,12 +151,16 @@ function parse(tokens) {
     return program;
 }
 
+// =======================
+// EXECUTION
+// =======================
+
 function execute(ast) {
     const env = {};
 
     function evalValue(node) {
-        if (node.type === "number" || node.type === "string") return node.value;
-        if (node.type === "ident") return env[node.value];
+        if (node.type === "value") return node.value;
+        if (node.type === "var") return env[node.name];
         throw new Error("Valeur inconnue");
     }
 
@@ -149,7 +169,7 @@ function execute(ast) {
 
             case "assign":
                 if (node.const && env[node.name] !== undefined)
-                    throw new Error("Impossible de redéfinir une constante : " + node.name);
+                    throw new Error("Constante déjà définie : " + node.name);
                 env[node.name] = evalValue(node.value);
                 return;
 
@@ -158,16 +178,14 @@ function execute(ast) {
                 return;
 
             case "if":
-                if (evalValue(node.cond)) {
+                if (evalValue(node.cond))
                     node.body.forEach(run);
-                }
                 return;
 
             case "repeat":
-                let count = evalValue(node.count);
-                for (let i = 0; i < count; i++) {
+                let n = evalValue(node.count);
+                for (let k = 0; k < n; k++)
                     node.body.forEach(run);
-                }
                 return;
         }
     }
