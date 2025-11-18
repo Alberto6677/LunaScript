@@ -18,9 +18,8 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
-          scope: '@your-scope' 
-          always-auth: true 
-          publish: true 
+          always-auth: true
+          publish: true
 
       - name: Install dependencies
         run: npm install
