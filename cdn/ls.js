@@ -4,7 +4,7 @@
 
     async function loadConfig() {
         try {
-            const res = await fetch("./ls-config.json");
+            const res = await fetch("https://lunascript.onrender.com/cdn/ls-config.json");
             const json = await res.json();
             LS_FUNCTIONS = json.functions || {};
         } catch {
