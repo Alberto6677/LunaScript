@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LunaScript — Le langage simple et français du Web</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
+      color: white;
+      font-family: system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- HEADER -->
+  <header class="w-full py-6 px-8 flex justify-between items-center">
+    <h1 class="text-3xl font-bold text-white">🌙 LunaScript</h1>
+
+    <nav class="flex gap-6 text-lg">
+      <a href="/docs" class="hover:text-blue-300 transition">Documentation</a>
+      <a href="https://github.com/" class="hover:text-blue-300 transition">GitHub</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="flex-1 flex flex-col items-center justify-center text-center px-6">
+    <h2 class="text-5xl font-extrabold mb-4">Le langage simple, lisible et français</h2>
+    <p class="text-xl text-gray-300 max-w-2xl">
+      Écris du code clair, rapide et logique. LunaScript te permet d’utiliser une syntaxe française,
+      intuitive, inspirée de Scratch mais aussi rapide qu’un vrai langage.
+    </p>
+
+    <div class="mt-10 flex gap-4">
+      <a href="/docs"
+         class="px-7 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl text-lg font-medium transition">
+        Lire la documentation
+      </a>
+      <a href="#exemple"
+         class="px-7 py-3 bg-white/10 hover:bg-white/20 rounded-xl text-lg font-medium transition">
+        Voir un exemple
+      </a>
+    </div>
+  </section>
+
+  <!-- EXAMPLE -->
+  <section id="exemple" class="w-full py-20 px-6 bg-black/30 backdrop-blur-lg mt-20">
+    <div class="max-w-4xl mx-auto">
+      <h3 class="text-3xl font-bold mb-6 text-center">Un premier script en LS</h3>
+
+      <pre class="bg-black/60 p-6 rounded-xl text-left text-lg overflow-x-auto">
+def nom = "Alberto67"
+msg(nom)
+
+repeter 3 {
+    msg("Salut")
+}
+
+si (1) {
+    msg("Condition vraie")
+}
+      </pre>
+
+      <p class="text-gray-300 text-center mt-4">
+        Une syntaxe simple, puissante et facile à apprendre.
+      </p>
+    </div>
+  </section>
+
+  <!-- INSTALL -->
+  <section class="w-full py-20 px-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <h3 class="text-3xl font-bold mb-6">Installer LunaScript</h3>
+
+      <p class="text-xl text-gray-300 mb-6">
+        Ajoute simplement le CDN à ta page HTML :
+      </p>
+
+      <pre class="bg-black/60 p-6 rounded-xl text-left text-lg overflow-x-auto">
+<script src="https://lunascript.onrender.com/cdn/ls.js"></script>
+<script type="ls">
+msg("LunaScript est chargé !")
+</script>
+        </p>
+      </pre>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="w-full py-8 text-center text-gray-400 text-sm">
+    © 2025 LunaScript — Créé par Alberto67
+  </footer>
+
+</body>
+</html>
