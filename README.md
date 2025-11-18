@@ -12,10 +12,10 @@ mais entièrement **en français** et conçu pour donner une syntaxe logique, cl
 Il s’utilise directement dans une page web avec :
 
 ```
-&lt;script src="https://lunascript.onrender.com/cdn/ls.js"&gt;&lt;/script&gt;
-&lt;script type="ls"&gt;
+<script src="https://lunascript.onrender.com/cdn/ls.js"></script>
+<script type="ls">
     msg("Bonjour du futur !")
-&lt;/script&gt;
+</script>
 ```
 
 ---
@@ -65,13 +65,13 @@ doc.el("zone").ajouter("p", "Hello LS")
 ## 🚀 Intégration dans une page web
 
 ```
-&lt;script src="https://lunascript.onrender.com/cdn/ls.js"&gt;&lt;/script&gt;
+<script src="https://lunascript.onrender.com/cdn/ls.js"></script>
 
-&lt;script type="ls"&gt;
+<script type="ls">
 repeter 3 {
     msg("LunaScript est vivant !")
 }
-&lt;/script&gt;
+</script>
 ```
 
 ---
@@ -79,7 +79,7 @@ repeter 3 {
 ## 📦 Installation (via CDN)
 
 ```
-&lt;script src="https://lunascript.onrender.com/cdn/ls.js"&gt;&lt;/script&gt;
+<script src="https://lunascript.onrender.com/cdn/ls.js"></script>
 ```
 
 Aucune configuration supplémentaire.
