@@ -3,135 +3,244 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LunaScript — Le langage lunaire du Web</title>
+  <title>LunaScript — Coder en français, naturellement</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
-
   <style>
-    body {
-      background: radial-gradient(circle at top center, #3a1b66 0%, #0e0a1f 60%, #05040b 100%);
-      color: white;
-      font-family: system-ui, -apple-system, sans-serif;
-      overflow-x: hidden;
+    @keyframes flicker {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.8; }
     }
 
-    /* Galaxie animée */
-    .stars {
+    .lamp-light {
       position: fixed;
-      top: 0; left: 0;
-      width: 200%; height: 200%;
-      background-image: radial-gradient(white 1px, transparent 1px);
-      background-size: 3px 3px;
-      opacity: 0.12;
-      animation: moveStars 80s linear infinite;
-    }
-    @keyframes moveStars {
-      from { transform: translate(0,0); }
-      to { transform: translate(-100px, -100px); }
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 300px;
+      pointer-events: none;
+      background: radial-gradient(ellipse at top, rgba(255,183,77,0.10) 0%, transparent 70%);
+      animation: flicker 3s ease-in-out infinite;
+      z-index:0;
     }
 
-    /* Flou de verre */
-    .glass {
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255,255,255,0.1);
+    ::selection {
+      background: #ffb74d;
+      color: #0a0a0a;
     }
   </style>
 </head>
+<body class="min-h-screen bg-neutral-950 text-neutral-200 font-sans">
 
-<body class="min-h-screen relative">
-
-  <div class="stars"></div>
+  <!-- Glow -->
+  <div class="lamp-light"></div>
 
   <!-- HEADER -->
-<header class="w-full flex justify-between items-center py-6 px-8 glass fixed top-0 left-0 z-50">
-  <div class="flex items-center gap-3">
-    <i data-lucide="moon" class="w-7 h-7 text-purple-300"></i>
-    <span class="text-2xl font-bold tracking-wide">LunaScript</span>
-  </div>
+  <header class="w-full flex justify-between items-center py-6 px-8 bg-black/40 backdrop-blur-xl border-b border-neutral-800 sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <i data-lucide="moon" class="w-7 h-7 text-amber-400"></i>
+      <span class="text-xl font-semibold tracking-wide">LunaScript</span>
+    </div>
+    <nav class="flex gap-8 text-sm text-neutral-400">
+      <a href="#manifeste" class="hover:text-white transition">Manifeste</a>
+      <a href="#code" class="hover:text-white transition">Code</a>
+      <a href="https://github.com/Alberto6677/LunaScript" target="_blank" class="flex items-center gap-1 hover:text-white transition">
+        <i data-lucide="github" class="w-4 h-4"></i> GitHub
+      </a>
+    </nav>
+  </header>
 
-  <nav class="flex gap-8 text-lg text-gray-300">
-    <a href="/docs" class="hover:text-purple-300 transition"><i data-lucide="library"></i></a>
-    <a href="https://github.com/Alberto6677/LunaScript" class="hover:text-purple-300 transition"><i data-lucide="github"></i></a>
-  </nav>
-</header>
+  <!-- HERO -->
+  <section class="pt-32 pb-24 px-6 max-w-5xl mx-auto">
+    <span class="text-sm text-neutral-500 uppercase tracking-widest">v0.1 — En construction</span>
+    <h1 class="text-6xl font-bold mt-4 mb-6 leading-tight">
+      Programmer en français,<br>
+      <span class="text-amber-400">sans compromis</span>
+    </h1>
+    <p class="text-xl text-neutral-400 leading-relaxed mb-10 max-w-3xl">
+      LunaScript n'est pas juste un langage. C'est une invitation à coder dans sa langue, 
+      à partager ses idées sans barrière, à apprendre ensemble.
+    </p>
+    <div class="bg-neutral-900/70 border-l-4 border-amber-400 p-6 rounded-lg mb-10">
+      <p class="italic text-neutral-300 text-lg">
+        "Pourquoi apprendre à coder devrait nécessiter de maîtriser l'anglais ?<br>
+        Pourquoi la logique devrait-elle se cacher derrière une langue étrangère ?"
+      </p>
+      <p class="text-sm text-neutral-500 mt-3">— La question qui a tout démarré</p>
+    </div>
+    <div class="flex flex-wrap gap-4 items-center">
+      <a href="#code" class="px-6 py-3 bg-amber-400 text-black font-semibold rounded-lg hover:bg-amber-300 transition">Voir du code</a>
+      <a class="px-6 py-3 bg-neutral-900 border border-neutral-800 rounded-lg font-semibold transition hover:bg-neutral-800" href="https://github.com/Alberto6677/LunaScript" target="_blank">Contribuer</a>
+      <div class="flex items-center gap-2 text-sm text-neutral-500">
+        <i data-lucide="heart" class="w-4 h-4 text-red-400"></i>
+        Projet humain & open-source
+      </div>
+    </div>
+  </section>
 
-<!-- HERO -->
-<section class="pt-40 pb-32 px-6 flex flex-col items-center text-center">
-  <h1 class="text-6xl font-extrabold bg-gradient-to-b from-purple-200 to-purple-500 text-transparent bg-clip-text drop-shadow-xl">
-    Le premier langage français<br>pensé pour le Web moderne
-  </h1>
+  <!-- MANIFESTE -->
+  <section id="manifeste" class="px-6 py-24 bg-black/40">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12">Le manifeste</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-xl hover:border-neutral-700 hover:bg-neutral-850 transition">
+          <i data-lucide="languages" class="w-8 h-8 text-amber-400 mb-4"></i>
+          <h3 class="text-xl font-semibold mb-3">Notre langue, notre code</h3>
+          <p class="text-neutral-400 leading-relaxed">
+            Coder en français, c'est penser en français. Pas de traduction mentale, pas de friction. Juste de la logique pure exprimée dans nos mots.
+          </p>
+        </div>
+        <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-xl hover:border-neutral-700 hover:bg-neutral-850 transition">
+          <i data-lucide="users" class="w-8 h-8 text-amber-400 mb-4"></i>
+          <h3 class="text-xl font-semibold mb-3">Accessible à tous</h3>
+          <p class="text-neutral-400 leading-relaxed">
+            Du lycéen curieux au développeur confirmé, LunaScript se lit naturellement. Pas de jargon inutile, pas de complexité artificielle.
+          </p>
+        </div>
+        <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-xl hover:border-neutral-700 hover:bg-neutral-850 transition">
+          <i data-lucide="zap" class="w-8 h-8 text-amber-400 mb-4"></i>
+          <h3 class="text-xl font-semibold mb-3">Pas de friction technique</h3>
+          <p class="text-neutral-400 leading-relaxed">
+            Une ligne de CDN et vous codez. Pas de Node, pas de build, pas de config. L'atelier est prêt, il ne manque que vous.
+          </p>
+        </div>
+        <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-xl hover:border-neutral-700 hover:bg-neutral-850 transition">
+          <i data-lucide="heart-handshake" class="w-8 h-8 text-amber-400 mb-4"></i>
+          <h3 class="text-xl font-semibold mb-3">Construit ensemble</h3>
+          <p class="text-neutral-400 leading-relaxed">
+            Open-source par conviction. Bienveillant par nature. Chaque contribution compte, chaque idée est entendue.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <p class="text-xl text-gray-300 mt-6 max-w-3xl leading-relaxed">
-    LunaScript est un langage simple, clair et entièrement en français.
-    Conçu pour apprendre plus vite, créer plus facilement, et rendre le code
-    accessible à tous — débutants comme passionnés.  
-    <br><br>
-    Il est <span class="text-purple-300 font-semibold">open-source</span>,
-    rapide à intégrer, et entièrement pensé pour les développeurs francophones.
-  </p>
-
-  <div class="mt-10 flex gap-4">
-    <a href="/docs" class="px-8 py-3 bg-purple-600 hover:bg-purple-500 rounded-xl text-lg font-medium transition shadow-xl flex items-center gap-1">
-      <i data-lucide="library" class="w-5 h-5"></i> Voir les docs
-    </a>
-
-    <a href="#exemple" class="px-8 py-3 bg-white/10 hover:bg-white/20 rounded-xl text-lg font-medium transition flex items-center gap-2">
-      <i data-lucide="code-2" class="w-5 h-5"></i> Voir du code LS
-    </a>
-  </div>
-
-  <div class="mt-12 flex items-center gap-3 bg-white/10 px-5 py-3 rounded-xl glass text-sm text-gray-300">
-    <i data-lucide="rocket" class="w-5 h-5 text-purple-300"></i>
-    Version 0.1 — Langage open-source en développement
-  </div>
-</section>
-
-  <!-- EXEMPLE DE CODE -->
-  <section id="exemple" class="px-6 py-20">
-    <div class="max-w-3xl mx-auto glass p-8 rounded-2xl shadow-2xl">
-      <h2 class="text-3xl font-bold mb-6 flex items-center gap-2">
-        <i data-lucide="rocket" class="w-6 h-6 text-purple-300"></i>
-        Premier script en LS
-      </h2>
-
-      <pre class="bg-black/40 p-6 rounded-xl text-lg text-purple-100 overflow-x-auto leading-relaxed">
+  <!-- CODE -->
+  <section id="code" class="px-6 py-24">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-4xl font-bold mb-4">Voyez par vous-même</h2>
+      <p class="text-neutral-500 mb-12">Du code qui se lit comme on pense</p>
+      <div class="bg-neutral-900 border border-neutral-800 rounded-xl p-8">
+        <div class="flex items-center justify-between mb-6 pb-4 border-b border-neutral-800">
+          <div class="flex items-center gap-3">
+            <div class="flex gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+            </div>
+            <span class="text-sm text-neutral-500 ml-2">premier_script.ls</span>
+          </div>
+          <span class="text-xs text-neutral-500">LunaScript v0.1</span>
+        </div>
+        <pre class="p-6 rounded-lg text-base leading-relaxed overflow-x-auto bg-neutral-950 border border-neutral-800">
 def nom = "Alberto67"
 msg(nom)
 
 repeter 3 {
-    msg("Salut")
+    msg("Salut depuis LunaScript")
 }
 
-si (1) {
-    msg("Condition vraie")
+si (nom == "Alberto67") {
+    msg("Bienvenue, créateur")
+} sinon {
+    msg("Bienvenue, visiteur")
 }
-      </pre>
+        </pre>
+        <div class="mt-6 bg-neutral-900 border border-neutral-800 p-5 rounded-lg">
+          <div class="text-sm text-neutral-500 mb-3 flex items-center gap-2">
+            <i data-lucide="terminal" class="w-4 h-4"></i> Console
+          </div>
+          <div class="font-mono text-sm space-y-1 text-green-400">
+            <div>&gt; Alberto67</div>
+            <div>&gt; Salut depuis LunaScript</div>
+            <div>&gt; Salut depuis LunaScript</div>
+            <div>&gt; Salut depuis LunaScript</div>
+            <div>&gt; Bienvenue, créateur</div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 bg-neutral-900 border-l-4 border-amber-400 p-6 rounded-lg">
+        <p class="text-neutral-500">
+          <i data-lucide="lightbulb" class="w-5 h-5 text-amber-400 inline mr-2"></i>
+          <strong>Vous voyez ?</strong> Pas besoin de documentation pour comprendre. Le code parle de lui-même.
+        </p>
+      </div>
     </div>
   </section>
 
   <!-- INSTALLATION -->
-  <section class="px-6 py-20 text-center">
-    <h2 class="text-4xl font-bold mb-8">Installer LunaScript</h2>
-
-    <p class="text-lg text-gray-300 mb-6">
-      Ajoute ceci à ton HTML :
-    </p>
-
-    <pre class="bg-black/40 p-6 rounded-xl text-lg max-w-2xl mx-auto overflow-x-auto">
+  <section class="px-6 py-24 bg-black/40">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-bold mb-4">Commencer maintenant</h2>
+      <p class="text-neutral-500 mb-10">Deux lignes. C'est tout.</p>
+      <div class="bg-neutral-900 border border-neutral-800 p-8 rounded-xl">
+        <div class="text-sm text-neutral-500 mb-4">Dans votre fichier HTML :</div>
+        <pre class="p-6 rounded-lg overflow-x-auto text-base bg-neutral-950 border border-neutral-800">
 &lt;script src="https://lunascript.onrender.com/cdn/ls.js"&gt;&lt;/script&gt;
 &lt;script type="ls"&gt;
-msg("LunaScript chargé !")
+    msg("LunaScript est prêt 🌙")
 &lt;/script&gt;
-    </pre>
+        </pre>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-8 text-sm text-neutral-500">
+        <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i> Pas de npm</div>
+        <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i> Pas de build</div>
+        <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i> Pas de configuration</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REJOINDRE -->
+  <section class="px-6 py-24">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-neutral-900 border border-neutral-800 p-12 rounded-xl text-center shadow-amber-400/20">
+        <i data-lucide="coffee" class="w-12 h-12 text-amber-400 mx-auto mb-6"></i>
+        <h2 class="text-3xl font-bold mb-4">L'atelier est ouvert</h2>
+        <p class="text-xl text-neutral-500 leading-relaxed mb-8 max-w-2xl mx-auto">
+          LunaScript se construit avec vous. Développeur, enseignant, étudiant, curieux... 
+          Votre perspective compte. Votre contribution compte.
+        </p>
+        <div class="flex gap-4 justify-center flex-wrap">
+          <a href="https://github.com/Alberto6677/LunaScript" target="_blank" class="px-8 py-4 bg-amber-400 text-black rounded-xl font-semibold hover:bg-amber-300 flex items-center gap-2 transition">
+            <i data-lucide="github" class="w-5 h-5"></i> Voir le code source
+          </a>
+          <a href="https://github.com/Alberto6677/LunaScript/issues" target="_blank" class="px-8 py-4 bg-neutral-900 border border-neutral-800 rounded-xl font-semibold hover:bg-neutral-800 flex items-center gap-2 transition">
+            <i data-lucide="message-square" class="w-5 h-5"></i> Proposer une idée
+          </a>
+        </div>
+        <p class="text-sm text-neutral-500 mt-8 italic">
+          "Les meilleurs projets sont ceux qu'on construit ensemble"
+        </p>
+      </div>
+    </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-8 text-center text-gray-400 text-sm">
-    © 2025 — LunaScript. Créé par Alberto67.
+  <footer class="py-12 px-6 border-t border-neutral-900">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-3">
+        <i data-lucide="moon" class="w-6 h-6 text-amber-400"></i>
+        <div>
+          <div class="font-semibold">LunaScript</div>
+          <div class="text-sm text-neutral-500">Par Alberto67</div>
+        </div>
+      </div>
+      <div class="flex gap-6 text-sm text-neutral-500">
+        <a href="https://github.com/Alberto6677/LunaScript" target="_blank" class="flex items-center gap-1 hover:text-white transition">
+          <i data-lucide="github" class="w-4 h-4"></i> GitHub
+        </a>
+        <a href="https://github.com/Alberto6677/LunaScript/blob/main/LICENSE" target="_blank" class="flex items-center gap-1 hover:text-white transition">
+          <i data-lucide="file-text" class="w-4 h-4"></i> Licence MIT
+        </a>
+      </div>
+    </div>
+    <div class="mt-8 text-center text-sm text-neutral-500">
+      Fait avec <i data-lucide="heart" class="w-3 h-3 inline text-red-400"></i> pour la communauté francophone
+    </div>
   </footer>
-  
+
   <script>
     lucide.createIcons();
   </script>
