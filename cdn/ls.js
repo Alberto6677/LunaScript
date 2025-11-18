@@ -1,5 +1,3 @@
-Mais non il faut permettre d'ajouter facilement des trucs a LS par exemple avec un ls-config.json
-ls.js :
 (function() {
 
     function loadLSScripts() {
