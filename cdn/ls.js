@@ -1,9 +1,23 @@
 (function() {
 
-    function loadLSScripts() {
+    let LS_FUNCTIONS = {};
+
+    async function loadConfig() {
+        try {
+            const res = await fetch("./ls-config.json");
+            const json = await res.json();
+            LS_FUNCTIONS = json.functions || {};
+        } catch {
+            console.warn("[LS] Aucun fichier ls-config.json trouvé.");
+        }
+    }
+
+    async function loadLSScripts() {
+        await loadConfig();
+
         const scripts = document.querySelectorAll('script[type="ls"]');
 
-        scripts.forEach(async script => {
+        for (let script of scripts) {
             let code = script.src
                 ? await fetch(script.src).then(r => r.text())
                 : script.innerText;
@@ -15,12 +29,16 @@
             } catch (err) {
                 console.error("[LS ERROR]", err.message);
             }
-        });
+        }
     }
 
     window.addEventListener("DOMContentLoaded", loadLSScripts);
 })();
 
+
+// ---------------------------
+// TOKENIZER
+// ---------------------------
 function tokenize(code) {
     const tokens = [];
     let i = 0;
@@ -32,7 +50,7 @@ function tokenize(code) {
 
         if (/[a-zA-Z_]/.test(c)) {
             let start = i;
-            while (/[a-zA-Z0-9_]/.test(code[i])) i++;
+            while (/[a-zA-Z0-9_.]/.test(code[i])) i++;
             tokens.push({ type: "ident", value: code.slice(start, i) });
             continue;
         }
@@ -61,6 +79,10 @@ function tokenize(code) {
     return tokens;
 }
 
+
+// ---------------------------
+// PARSER
+// ---------------------------
 function parse(tokens) {
     let i = 0;
 
@@ -74,60 +96,32 @@ function parse(tokens) {
         throw new Error("Valeur invalide");
     }
 
-    function parseExpression() {
-        return parseValue();
-    }
-
     function parseStatement() {
         let t = peek();
 
+        // def / var
         if (t.value === "def" || t.value === "var") {
-            next(); // consume def/var
+            next();
             let name = next().value;
             next(); // =
-            let value = parseExpression();
+            let value = parseValue();
             return { type: "assign", const: (t.value === "def"), name, value };
         }
 
-        if (t.value === "msg") {
-            next(); // msg
+        // Fonction dynamique venant de ls-config.json
+        if (t.type === "ident" && LS_FUNCTIONS[t.value]) {
+            let funcName = next().value; // consume name
             next(); // (
-            let val = parseExpression();
+            let arg = parseValue();
             next(); // )
-            return { type: "msg", value: val };
-        }
-
-        if (t.value === "si") {
-            next(); // si
-            next(); // (
-            let cond = parseExpression();
-            next(); // )
-            next(); // {
-            let body = parseBlock();
-            return { type: "if", cond, body };
-        }
-
-        if (t.value === "repeter") {
-            next(); // repeter
-            let count = parseExpression();
-            next(); // {
-            let body = parseBlock();
-            return { type: "repeat", count, body };
+            return { type: "call", name: funcName, arg };
         }
 
         throw new Error("Instruction inconnue : " + t.value);
     }
 
-    function parseBlock() {
-        const statements = [];
-        while (peek().value !== "}") {
-            statements.push(parseStatement());
-        }
-        next(); // }
-        return statements;
-    }
-
     const program = [];
+
     while (peek().type !== "EOF") {
         program.push(parseStatement());
     }
@@ -135,6 +129,10 @@ function parse(tokens) {
     return program;
 }
 
+
+// ---------------------------
+// EXECUTION
+// ---------------------------
 function execute(ast) {
     const env = {};
 
@@ -148,30 +146,19 @@ function execute(ast) {
         switch (node.type) {
 
             case "assign":
-                if (node.const && env[node.name] !== undefined)
-                    throw new Error("Impossible de redéfinir une constante : " + node.name);
                 env[node.name] = evalValue(node.value);
                 return;
 
-            case "msg":
-                console.log(evalValue(node.value));
-                return;
+            case "call":
+                let js = LS_FUNCTIONS[node.name];
 
-            case "if":
-                if (evalValue(node.cond)) {
-                    node.body.forEach(run);
-                }
-                return;
+                // conversion string → vraie fonction JS
+                const func = eval(js);
 
-            case "repeat":
-                let count = evalValue(node.count);
-                for (let i = 0; i < count; i++) {
-                    node.body.forEach(run);
-                }
+                func(evalValue(node.arg));
                 return;
         }
     }
 
     ast.forEach(run);
 }
-
