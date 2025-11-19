@@ -205,12 +205,16 @@ const doc = {
     id: (id) => wrapElement(document.getElementById(id)),
     type: (type) => {
         const els = Array.from(document.getElementsByTagName(type));
-        return els.map(wrapElement);
+        return wrapElement(els);
     }
 };
 
 function wrapElement(el) {
     if (!el) return null;
+
+    // Si c'est un tableau, wrapper chaque élément
+    if (Array.isArray(el)) return el.map(wrapElement);
+
     return {
         _el: el,
         get texte() { return el.textContent; },
