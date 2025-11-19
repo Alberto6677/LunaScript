@@ -152,6 +152,33 @@ function parse(tokens) {
             return { type: "repeat", count, body };
         }
 
+        // ----- assignation sur propriété -----
+        if (t.type === "ident" && tokens[i]?.value === ".") {
+            let objName = next().value;
+            next(); // .
+            let prop = next().value;
+            next(); // =
+            let val = parseValue();
+            return { type: "propAssign", obj: objName, prop, value: val };
+        }
+        
+        // ----- appel de méthode -----
+        if (t.type === "ident" && tokens[i]?.value === ".") {
+            let objName = next().value;
+            next(); // .
+            let method = next().value
+                if (peek().value === "(") {
+                    next(); // (
+                    let args = [];
+                    while (peek().value !== ")") {
+                        args.push(parseValue());
+                        if (peek().value === ",") next();
+                    }
+                    next(); // )
+                    return { type: "methodCall", obj: objName, method, args };
+                }
+        }
+
         throw new Error("Instruction inconnue : " + t.value);
     }
 
@@ -236,6 +263,21 @@ function execute(ast) {
                 let n = evalValue(node.count);
                 for (let k = 0; k < n; k++)
                     node.body.forEach(run);
+                return;
+
+            case "propAssign":
+                const target = env[node.obj];
+                if (!target) throw new Error("Objet inexistant : " + node.obj);
+                target[node.prop] = evalValue(node.value);
+                return;
+            
+            case "methodCall":
+                const obj = env[node.obj];
+                if (!obj) throw new Error("Objet inexistant : " + node.obj);
+                if (typeof obj[node.method] !== "function")
+                    throw new Error("Méthode inexistante : " + node.method);
+                const evaluatedArgs = node.args.map(evalValue);
+                obj[node.method](...evaluatedArgs);
                 return;
         }
     }
