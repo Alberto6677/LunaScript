@@ -165,7 +165,7 @@ function parse(tokens) {
             }
             
             if (peek().value === "(") { // appel méthode
-                next(); // {
+                next(); // (
                 const args = []
                     while (peek().value !== ")") {
                         args.push(parseValue());
@@ -263,19 +263,19 @@ function execute(ast) {
                     node.body.forEach(run);
                 return;
 
-            case "propAssign":
+            case "memberAssign":
                 const target = env[node.obj];
                 if (!target) throw new Error("Objet inexistant : " + node.obj);
-                target[node.prop] = evalValue(node.value);
+                target[node.member] = evalValue(node.value);
                 return;
             
-            case "methodCall":
+            case "memberCall":
                 const obj = env[node.obj];
                 if (!obj) throw new Error("Objet inexistant : " + node.obj);
-                if (typeof obj[node.method] !== "function")
-                    throw new Error("Méthode inexistante : " + node.method);
+                if (typeof obj[node.member] !== "function")
+                    throw new Error("Méthode inexistante : " + node.member);
                 const evaluatedArgs = node.args.map(evalValue);
-                obj[node.method](...evaluatedArgs);
+                obj[node.member](...evaluatedArgs);
                 return;
         }
     }
