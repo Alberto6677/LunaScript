@@ -272,11 +272,17 @@ function execute(ast) {
             case "memberCall":
                 const obj = env[node.obj];
                 if (!obj) throw new Error("Objet inexistant : " + node.obj);
-                if (typeof obj[node.member] !== "function")
+                const args = node.args.map(evalValue);
+                
+                if (obj && typeof obj[node.member] === "function") {
+                    obj[node.member](...args);
+                } else if (obj && obj._el && typeof obj[node.member] === "function") {
+                    // pour les méthodes sur l'objet wrapElement
+                    obj[node.member](...args);
+                } else {
                     throw new Error("Méthode inexistante : " + node.member);
-                const evaluatedArgs = node.args.map(evalValue);
-                obj[node.member](...evaluatedArgs);
-                return;
+                }
+    return;
         }
     }
 
