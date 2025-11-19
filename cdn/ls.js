@@ -152,31 +152,29 @@ function parse(tokens) {
             return { type: "repeat", count, body };
         }
 
-        // ----- assignation sur propriété -----
+        // ----- assignation sur propriété ou appel de méthode -----
         if (t.type === "ident" && tokens[i]?.value === ".") {
-            let objName = next().value;
+            let objName = next().value; // variable
             next(); // .
-            let prop = next().value;
-            next(); // =
-            let val = parseValue();
-            return { type: "propAssign", obj: objName, prop, value: val };
-        }
-        
-        // ----- appel de méthode -----
-        if (t.type === "ident" && tokens[i]?.value === ".") {
-            let objName = next().value;
-            next(); // .
-            let method = next().value
-                if (peek().value === "(") {
-                    next(); // (
-                    let args = [];
+            let member = next().value; // propriété ou méthode
+            
+            if (peek().value === "=") { // assignation
+                next(); // =
+                let val = parseValue();
+                return { type: "memberAssign", obj: objName, member, value: val };
+            }
+            
+            if (peek().value === "(") { // appel méthode
+                next(); // {
+                const args = []
                     while (peek().value !== ")") {
                         args.push(parseValue());
-                        if (peek().value === ",") next();
+                        if (peek().value === ",") next()
                     }
-                    next(); // )
-                    return { type: "methodCall", obj: objName, method, args };
-                }
+                next(); // )
+                return { type: "memberCall", obj: objName, member, args };
+            }
+            throw new Error("Syntaxe invalide pour le member access");
         }
 
         throw new Error("Instruction inconnue : " + t.value);
