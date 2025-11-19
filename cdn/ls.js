@@ -111,6 +111,15 @@ function parse(tokens) {
             return { type: "msg", value: val };
         }
 
+        // ----- popup("hello") -----
+        if (t.value === "popup") {
+            next(); // popup
+            next(); // (
+            let val = parseValue();
+            next(); // )
+            return { type: "popup", value: val };
+        }
+
         // ----- si(cond){...} -----
         if (t.value === "si") {
             next(); // si
@@ -175,6 +184,10 @@ function execute(ast) {
 
             case "msg":
                 console.log(evalValue(node.value));
+                return;
+
+            case "popup":
+                alert(evalValue(node.value));
                 return;
 
             case "if":
