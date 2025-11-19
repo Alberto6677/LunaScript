@@ -81,6 +81,18 @@ function parse(tokens) {
 
     function parseValue() {
         let t = next();
+
+        // DOM access
+        if (t.type === "ident" && t.value === "doc") {
+            next(); // doc
+            next(); // .
+            let method = next().value; // id ou type
+            next(); // (
+            let arg = parseValue();
+            next(); // )
+            return { type: "value", value: doc[method](arg.value) };
+        }
+        
         if (t.type === "number" || t.type === "string")
             return { type: "value", value: t.value };
 
@@ -161,6 +173,30 @@ function parse(tokens) {
 }
 
 // =======================
+// DOM UTILS
+// =======================
+
+const doc = {
+    id: (id) => wrapElement(document.getElementById(id)),
+    type: (type) => {
+        const els = Array.from(document.getElementsByTagName(type));
+        return els.map(wrapElement);
+    }
+};
+
+function wrapElement(el) {
+    if (!el) return null;
+    return {
+        _el: el,
+        get texte() { return el.textContent; },
+        set texte(val) { el.textContent = val; },
+        get html() { return el.innerHTML; },
+        set html(val) { el.innerHTML = val; },
+        suppr: () => el.remove()
+    };
+}
+
+// =======================
 // EXECUTION
 // =======================
 
@@ -170,6 +206,7 @@ function execute(ast) {
     function evalValue(node) {
         if (node.type === "value") return node.value;
         if (node.type === "var") return env[node.name];
+        if (node.type === "dom") return node.ref;
         throw new Error("Valeur inconnue");
     }
 
