@@ -1,6 +1,6 @@
 {
   "name": "lunascript-fr",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "LunaScript — un langage simple, lisible et extensible pour le web.",
   "main": "cdn/ls.js",
   "module": "cdn/ls.js",
