@@ -65,7 +65,7 @@ doc.el("zone").ajouter("p", "Hello LS")
 ## 🚀 Intégration dans une page web
 
 ```
-<script src="https://lunascript.onrender.com/cdn/ls.js"></script>
+<script src="https://unpkg.com/lunascript-fr"></script>
 
 <script type="ls">
 repeter 3 {
@@ -80,6 +80,21 @@ repeter 3 {
 
 ```
 <script src="https://lunascript.onrender.com/cdn/ls.js"></script>
+```
+
+Aucune configuration supplémentaire.
+
+---
+
+## 📦 Installation (via package)
+
+```
+<script src="https://unpkg.com/lunascript-fr"></script>
+```
+
+Si vous souhaitez utiliser une version précise il faudra utiliser ceci
+```
+<script src="https://unpkg.com/lunascript-fr@(la version que vous voulez utiliser)"></script>
 ```
 
 Aucune configuration supplémentaire.
