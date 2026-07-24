@@ -12,9 +12,9 @@ mais entièrement **en français** et conçu pour donner une syntaxe logique, cl
 Il s’utilise directement dans une page web avec :
 
 ```
-<script src="https://lunascript.onrender.com/cdn/ls.js"></script>
+<script src="https://unpkg.com/lunascript-fr"></script>
 <script type="ls">
-    msg("Bonjour du futur !")
+    msg("Bonjour LunaScript")
 </script>
 ```
 
@@ -22,11 +22,11 @@ Il s’utilise directement dans une page web avec :
 
 ## 🎯 Objectifs du langage
 
-- 🧠 *Compréhension immédiate* — tout est écrit en français  
-- ⚡ *Syntaxe rapide* — pas de bruit, pas de complexité  
-- 🌍 *Exécutable partout* — via un interpréteur JavaScript léger  
-- 🎨 *Éducatif & créatif* — parfait pour apprendre ou prototyper  
-- 🔧 *Extensible* — API interne simple pour ajouter des fonctions
+- 🧠 **Compréhension immédiate** — tout est écrit en français  
+- ⚡ **Syntaxe rapide** — pas de bruit, pas de complexité  
+- 🌍 **Exécutable partout** — via un interpréteur JavaScript léger  
+- 🎨 **Éducatif & créatif** — parfait pour apprendre ou prototyper  
+- 🔧 **Extensible** — API interne simple pour ajouter des fonctions
 
 ---
 
@@ -34,7 +34,7 @@ Il s’utilise directement dans une page web avec :
 
 ### Variables
 ```
-def nom = "Alberto67"
+def nom = "MrAlberto"
 var compteur = 0
 ```
 
@@ -77,6 +77,7 @@ repeter 3 {
 ---
 
 ## 📦 Installation (via CDN)
+Possible mais pas recommandé
 
 ```
 <script src="https://lunascript.onrender.com/cdn/ls.js"></script>
@@ -127,7 +128,7 @@ Vous êtes libre de l’utiliser, le modifier et le redistribuer.
 
 ## 🌟 Auteur
 
-**Alberto67** — créateur de LunaScript  
+**MrAlberto** — créateur de LunaScript  
 Projet ouvert dans un but éducatif, créatif et accessible.
 
 ---
